@@ -8,4 +8,17 @@ namespace Bundler\Markup;
  */
 class StylesheetMarkup extends AbstractMarkup {
 
+    /**
+     * @return string
+     */
+    public function getFilename() {
+        return $this->getBundlerDirectory() . '/stylesheet.php';
+    }
+
+    /**
+     * @return string
+     */
+    public function getCacheFilename() {
+        return $this->getBundlerDirectory() . '/stylesheet.cache.php';
+    }
 }

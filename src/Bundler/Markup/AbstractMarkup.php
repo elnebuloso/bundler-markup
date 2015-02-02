@@ -113,4 +113,75 @@ abstract class AbstractMarkup {
     public function getVersionized() {
         return $this->versionized;
     }
+
+    /**
+     * @param string $packageName
+     * @return array
+     */
+    public function getFiles($packageName) {
+        if(!$this->getDevelopment()) {
+            return $this->getFilesCached($packageName);
+        }
+
+        return $this->getFilesDevelopment($packageName);
+    }
+
+    /**
+     * @param string $packageName
+     * @return array
+     * @throws MarkupException
+     */
+    public function getFilesCached($packageName) {
+        /** @noinspection PhpIncludeInspection */
+        $cache = include $this->getCacheFilename();
+
+        if(!array_key_exists($packageName, $cache)) {
+            throw new MarkupException('missing package in cache file');
+        }
+
+        $type = $this->getMinified() ? "min" : "max";
+        $filename = $this->getHost() . $cache[$packageName][$type];
+
+        if($this->getVersionized()) {
+            $filename .= '?v=' . $cache[$packageName]['md5'];
+        }
+
+        return array($filename);
+    }
+
+    /**
+     * @param string $packageName
+     * @return array
+     * @throws MarkupException
+     */
+    public function getFilesDevelopment($packageName) {
+        return array();
+        //        $bundler = $this->getBundler();
+        //        $bundler->configure();
+        //
+        //        $package = $bundler->getPackageByName($package);
+        //
+        //        if(is_null($package)) {
+        //            throw new MarkupException('missing package definition');
+        //        }
+        //
+        //        $files = array();
+        //
+        //        foreach($package->getIncludes() as $file) {
+        //            $filename = rtrim($this->getHost() . $file, '$');
+        //            $files[] = $filename;
+        //        }
+        //
+        //        return $files;
+    }
+
+    /**
+     * @return string
+     */
+    abstract public function getFilename();
+
+    /**
+     * @return string
+     */
+    abstract public function getCacheFilename();
 }

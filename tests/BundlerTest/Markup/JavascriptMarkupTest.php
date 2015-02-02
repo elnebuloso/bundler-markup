@@ -23,6 +23,13 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     * @return void
+     */
+    public function tearDown() {
+        $this->markup = null;
+    }
+
+    /**
      * @test
      */
     public function test_construct() {
@@ -76,5 +83,96 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
         $expected = uniqid();
         $this->markup->setVersionized($expected);
         $this->assertEquals($expected, $this->markup->getVersionized());
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFilename() {
+        $expected = '/foo/javascript.php';
+        $this->markup->setBundlerDirectory('/foo');
+        $this->assertEquals($expected, $this->markup->getFilename());
+    }
+
+    /**
+     * @test
+     */
+    public function test_getCacheFilename() {
+        $expected = '/bar/javascript.cache.php';
+        $this->markup->setBundlerDirectory('/bar');
+        $this->assertEquals($expected, $this->markup->getCacheFilename());
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFilesCached_min_versionized() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment('false');
+        $this->markup->setMinified(true);
+        $this->markup->setVersionized(true);
+
+        $result = $this->markup->getFilesCached('javascriptFoo');
+        $expected = array('/js/javascriptFoo.min.js?v=cf1c4502fb665807b78f2f1ea6619f81');
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFilesCached_min_not_versionized() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment('false');
+        $this->markup->setMinified(true);
+        $this->markup->setVersionized(false);
+
+        $result = $this->markup->getFilesCached('javascriptFoo');
+        $expected = array('/js/javascriptFoo.min.js');
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFilesCached_max_versionized() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment('false');
+        $this->markup->setMinified(false);
+        $this->markup->setVersionized(true);
+
+        $result = $this->markup->getFilesCached('javascriptFoo');
+        $expected = array('/js/javascriptFoo.max.js?v=cf1c4502fb665807b78f2f1ea6619f81');
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFilesCached_max_not_versionized() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment('false');
+        $this->markup->setMinified(false);
+        $this->markup->setVersionized(false);
+
+        $result = $this->markup->getFilesCached('javascriptFoo');
+        $expected = array('/js/javascriptFoo.max.js');
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @expectedException \Bundler\Markup\MarkupException
+     * @expectedExceptionMessage missing package in cache file
+     */
+    public function test_getFilesCached_packageNotFound() {
+        $this->markup->getFilesCached('foo');
     }
 }
