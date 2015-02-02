@@ -136,7 +136,7 @@ abstract class AbstractMarkup {
         $cache = include $this->getCacheFilename();
 
         if(!array_key_exists($packageName, $cache)) {
-            throw new MarkupException('missing package in cache file');
+            throw new MarkupException('missing package in bundler cache file');
         }
 
         $type = $this->getMinified() ? "min" : "max";
@@ -155,24 +155,21 @@ abstract class AbstractMarkup {
      * @throws MarkupException
      */
     public function getFilesDevelopment($packageName) {
-        return array();
-        //        $bundler = $this->getBundler();
-        //        $bundler->configure();
-        //
-        //        $package = $bundler->getPackageByName($package);
-        //
-        //        if(is_null($package)) {
-        //            throw new MarkupException('missing package definition');
-        //        }
-        //
-        //        $files = array();
-        //
-        //        foreach($package->getIncludes() as $file) {
-        //            $filename = rtrim($this->getHost() . $file, '$');
-        //            $files[] = $filename;
-        //        }
-        //
-        //        return $files;
+        /** @noinspection PhpIncludeInspection */
+        $file = include $this->getFilename();
+
+        if(!array_key_exists($packageName, $file)) {
+            throw new MarkupException('missing package in bundler file');
+        }
+
+        $package = $file[$packageName];
+        $files = array();
+
+        foreach($package['include'] as $file) {
+            $files[] = $this->getHost() . trim($file, '/');
+        }
+
+        return $files;
     }
 
     /**

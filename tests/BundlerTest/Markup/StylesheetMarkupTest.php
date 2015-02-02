@@ -109,7 +109,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
     public function test_getFilesCached_min_versionized() {
         $this->markup->setBundlerDirectory('./.bundler');
         $this->markup->setHost('/');
-        $this->markup->setDevelopment('false');
+        $this->markup->setDevelopment(false);
         $this->markup->setMinified(true);
         $this->markup->setVersionized(true);
 
@@ -125,7 +125,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
     public function test_getFilesCached_min_not_versionized() {
         $this->markup->setBundlerDirectory('./.bundler');
         $this->markup->setHost('/');
-        $this->markup->setDevelopment('false');
+        $this->markup->setDevelopment(false);
         $this->markup->setMinified(true);
         $this->markup->setVersionized(false);
 
@@ -141,7 +141,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
     public function test_getFilesCached_max_versionized() {
         $this->markup->setBundlerDirectory('./.bundler');
         $this->markup->setHost('/');
-        $this->markup->setDevelopment('false');
+        $this->markup->setDevelopment(false);
         $this->markup->setMinified(false);
         $this->markup->setVersionized(true);
 
@@ -157,7 +157,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
     public function test_getFilesCached_max_not_versionized() {
         $this->markup->setBundlerDirectory('./.bundler');
         $this->markup->setHost('/');
-        $this->markup->setDevelopment('false');
+        $this->markup->setDevelopment(false);
         $this->markup->setMinified(false);
         $this->markup->setVersionized(false);
 
@@ -170,9 +170,68 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
     /**
      * @test
      * @expectedException \Bundler\Markup\MarkupException
-     * @expectedExceptionMessage missing package in cache file
+     * @expectedExceptionMessage missing package in bundler cache file
      */
     public function test_getFilesCached_packageNotFound() {
         $this->markup->getFilesCached('foo');
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFilesDevelopment() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment(true);
+
+        $result = $this->markup->getFilesDevelopment('stylesheetFoo');
+        $expected = array(
+            '/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
+            '/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css'
+        );
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     * @expectedException \Bundler\Markup\MarkupException
+     * @expectedExceptionMessage missing package in bundler file
+     */
+    public function test_getFilesDevelopment_packageNotFound() {
+        $this->markup->getFilesDevelopment('foo');
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFiles() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment(false);
+        $this->markup->setMinified(true);
+        $this->markup->setVersionized(true);
+
+        $result = $this->markup->getFiles('stylesheetFoo');
+        $expected = array('/css/stylesheetFoo.min.css?v=0aed497cc25bfc6ad59025ffd207cdb5');
+
+        $this->assertEquals($expected, $result);
+    }
+
+    /**
+     * @test
+     */
+    public function test_getFiles_development() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment(true);
+
+        $result = $this->markup->getFiles('stylesheetFoo');
+        $expected = array(
+            '/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
+            '/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css'
+        );
+
+        $this->assertEquals($expected, $result);
     }
 }
