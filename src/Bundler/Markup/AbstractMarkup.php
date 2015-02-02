@@ -1,8 +1,6 @@
 <?php
 namespace Bundler\Markup;
 
-use Bundler\BundlerInterface;
-
 /**
  * Class AbstractMarkup
  *
@@ -115,80 +113,4 @@ abstract class AbstractMarkup {
     public function getVersionized() {
         return $this->versionized;
     }
-
-    /**
-     * @param string $package
-     * @return array
-     */
-    protected function getFiles($package) {
-        if($this->getDevelopment()) {
-            return $this->getFilesDevelopment($package);
-        }
-        else {
-            return $this->getFilesCached($package);
-        }
-    }
-
-    /**
-     * @param string $package
-     * @return array
-     * @throws MarkupException
-     */
-    protected function getFilesCached($package) {
-        $cache = include $this->getCacheFilename();
-
-        if(!array_key_exists($package, $cache)) {
-            throw new MarkupException('missing package in cache file', 4001);
-        }
-
-        $type = $this->getMinified() ? "min" : "max";
-        $filename = $this->getHost() . $cache[$package][$type];
-
-        if($this->getVersionized()) {
-            $filename .= '?v=' . $cache[$package]['md5'];
-        }
-
-        return array($filename);
-    }
-
-    /**
-     * @param string $package
-     * @return array
-     * @throws MarkupException
-     */
-    protected function getFilesDevelopment($package) {
-        $bundler = $this->getBundler();
-        $bundler->configure();
-
-        $package = $bundler->getPackageByName($package);
-
-        if(is_null($package)) {
-            throw new MarkupException('missing package definition');
-        }
-
-        $files = array();
-
-        foreach($package->getIncludes() as $file) {
-            $filename = rtrim($this->getHost() . $file, '$');
-            $files[] = $filename;
-        }
-
-        return $files;
-    }
-
-    /**
-     * @return BundlerInterface
-     */
-    abstract protected function getBundler();
-
-    /**
-     * @return string
-     */
-    abstract protected function getCacheFilename();
-
-    /**
-     * @param $packageName
-     * @return string
-     */
-    abstract public function getMarkup($packageName);
 }
