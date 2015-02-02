@@ -1,0 +1,34 @@
+{
+    "name": "elnebuloso\/bundler-markup",
+    "type": "library",
+    "license": "MIT",
+    "description": "markup renderer for bundler",
+    "keywords":
+        [
+            "bundling",
+            "minifying",
+            "javascript",
+            "js",
+            "stylesheet",
+            "css"
+        ],
+    "authors":
+        [
+            {
+                "name": "Jeff Tunessen",
+                "email": "jeff.tunessen@gmail.com",
+                "role": "Maintainer"
+            }
+        ],
+    "require": {
+        "php": "~5.3"
+    },
+    "suggest": {
+        "elnebuloso/bundler": "bundle your stylesheets and your javascripts"
+    },
+    "autoload": {
+        "psr-0": {
+            "Bundler\\": "src\/"
+        }
+    }
+}
