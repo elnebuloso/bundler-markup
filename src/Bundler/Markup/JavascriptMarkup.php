@@ -21,4 +21,18 @@ class JavascriptMarkup extends AbstractMarkup {
     public function getCacheFilename() {
         return $this->getBundlerDirectory() . '/javascript.cache.php';
     }
+
+    /**
+     * @param string $packageName
+     * @return string
+     */
+    public function getMarkup($packageName) {
+        $markup = array();
+
+        foreach($this->getFiles($packageName) as $file) {
+            $markup[] = '<script src="' . $file . '"></script>';
+        }
+
+        return trim(implode(PHP_EOL, $markup));
+    }
 }

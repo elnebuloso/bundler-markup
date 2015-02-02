@@ -234,4 +234,17 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function test_getMarkup() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment(false);
+        $this->markup->setMinified(true);
+        $this->markup->setVersionized(true);
+
+        $this->assertEquals('<script src="/js/javascriptFoo.min.js?v=cf1c4502fb665807b78f2f1ea6619f81"></script>', $this->markup->getMarkup('javascriptFoo'));
+    }
 }

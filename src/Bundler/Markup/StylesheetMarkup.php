@@ -21,4 +21,18 @@ class StylesheetMarkup extends AbstractMarkup {
     public function getCacheFilename() {
         return $this->getBundlerDirectory() . '/stylesheet.cache.php';
     }
+
+    /**
+     * @param string $packageName
+     * @return string
+     */
+    public function getMarkup($packageName) {
+        $markup = array();
+
+        foreach($this->getFiles($packageName) as $file) {
+            $markup[] = '<link rel="stylesheet" href="' . $file . '" />';
+        }
+
+        return trim(implode(PHP_EOL, $markup));
+    }
 }

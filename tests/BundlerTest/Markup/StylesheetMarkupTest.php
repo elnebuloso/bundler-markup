@@ -234,4 +234,17 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
 
         $this->assertEquals($expected, $result);
     }
+
+    /**
+     * @test
+     */
+    public function test_getMarkup() {
+        $this->markup->setBundlerDirectory('./.bundler');
+        $this->markup->setHost('/');
+        $this->markup->setDevelopment(false);
+        $this->markup->setMinified(true);
+        $this->markup->setVersionized(true);
+
+        $this->assertEquals('<link rel="stylesheet" href="/css/stylesheetFoo.min.css?v=0aed497cc25bfc6ad59025ffd207cdb5" />', $this->markup->getMarkup('stylesheetFoo'));
+    }
 }
