@@ -11,6 +11,16 @@ use Bundler\Markup\JavascriptMarkup;
 class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
 
     /**
+     * @var array
+     */
+    private $config;
+
+    /**
+     * @var array
+     */
+    private $configCache;
+
+    /**
      * @var JavascriptMarkup
      */
     private $markup;
@@ -19,6 +29,8 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
      * @return void
      */
     public function setUp() {
+        $this->config = include dirname(__FILE__) . '/../../../.bundler/javascript.php';
+        $this->configCache = include dirname(__FILE__) . '/../../../.bundler/javascript.cache.php';
         $this->markup = new JavascriptMarkup();
     }
 
@@ -114,7 +126,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('javascriptFoo');
-        $expected = array('/js/javascriptFoo.min.js?v=cf1c4502fb665807b78f2f1ea6619f81');
+        $expected = array('/js/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -146,7 +158,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('javascriptFoo');
-        $expected = array('/js/javascriptFoo.max.js?v=cf1c4502fb665807b78f2f1ea6619f81');
+        $expected = array('/js/javascriptFoo.max.js?v=' . $this->configCache['javascriptFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -213,7 +225,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFiles('javascriptFoo');
-        $expected = array('/js/javascriptFoo.min.js?v=cf1c4502fb665807b78f2f1ea6619f81');
+        $expected = array('/js/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -245,6 +257,6 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setMinified(true);
         $this->markup->setVersionized(true);
 
-        $this->assertEquals('<script src="/js/javascriptFoo.min.js?v=cf1c4502fb665807b78f2f1ea6619f81"></script>', $this->markup->getMarkup('javascriptFoo'));
+        $this->assertEquals('<script src="/js/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5'] . '"></script>', $this->markup->getMarkup('javascriptFoo'));
     }
 }

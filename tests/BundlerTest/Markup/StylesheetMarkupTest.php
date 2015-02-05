@@ -11,6 +11,16 @@ use Bundler\Markup\StylesheetMarkup;
 class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
 
     /**
+     * @var array
+     */
+    private $config;
+
+    /**
+     * @var array
+     */
+    private $configCache;
+
+    /**
      * @var StylesheetMarkup
      */
     private $markup;
@@ -19,6 +29,8 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
      * @return void
      */
     public function setUp() {
+        $this->config = include dirname(__FILE__) . '/../../../.bundler/stylesheet.php';
+        $this->configCache = include dirname(__FILE__) . '/../../../.bundler/stylesheet.cache.php';
         $this->markup = new StylesheetMarkup();
     }
 
@@ -114,7 +126,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('stylesheetFoo');
-        $expected = array('/css/stylesheetFoo.min.css?v=0aed497cc25bfc6ad59025ffd207cdb5');
+        $expected = array('/css/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -146,7 +158,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('stylesheetFoo');
-        $expected = array('/css/stylesheetFoo.max.css?v=0aed497cc25bfc6ad59025ffd207cdb5');
+        $expected = array('/css/stylesheetFoo.max.css?v=' . $this->configCache['stylesheetFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -213,7 +225,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFiles('stylesheetFoo');
-        $expected = array('/css/stylesheetFoo.min.css?v=0aed497cc25bfc6ad59025ffd207cdb5');
+        $expected = array('/css/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -245,6 +257,6 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase {
         $this->markup->setMinified(true);
         $this->markup->setVersionized(true);
 
-        $this->assertEquals('<link rel="stylesheet" href="/css/stylesheetFoo.min.css?v=0aed497cc25bfc6ad59025ffd207cdb5" />', $this->markup->getMarkup('stylesheetFoo'));
+        $this->assertEquals('<link rel="stylesheet" href="/css/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5'] . '" />', $this->markup->getMarkup('stylesheetFoo'));
     }
 }
