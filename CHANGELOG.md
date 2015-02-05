@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 8.1.1
+
+- updated composer suggest
+
 ## 8.1.0
 
 - updated phpunit testing

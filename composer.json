@@ -22,7 +22,7 @@
         "php": "~5.3"
     },
     "suggest": {
-        "elnebuloso\/bundler": "bundle your stylesheets and your javascripts"
+        "elnebuloso\/bundler": "as require-dev to bundle your stylesheets and your javascripts"
     },
     "autoload": {
         "psr-0": {
