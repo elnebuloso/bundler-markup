@@ -19,6 +19,7 @@ The following versions of PHP are supported by this version.
 
 ```php
 $stylesheetMarkup = new StylesheetMarkup();
+$stylesheetMarkup->setHost('./');
 $stylesheetMarkup->setDevelopment(true);
 $stylesheetMarkup->setMinified(true);
 $stylesheetMarkup->setVersionized(true);
@@ -30,6 +31,7 @@ echo $stylesheetMarkup->getMarkup('stylesheetFoo');
 
 ```php
 $javascriptMarkup = new JavascriptMarkup();
+$javascriptMarkup->setHost('./');
 $javascriptMarkup->setDevelopment(true);
 $javascriptMarkup->setMinified(true);
 $javascriptMarkup->setVersionized(true);
