@@ -6,7 +6,8 @@ namespace Bundler\Markup;
  *
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
-abstract class AbstractMarkup {
+abstract class AbstractMarkup
+{
 
     /**
      * @var string
@@ -36,7 +37,8 @@ abstract class AbstractMarkup {
     /**
      * @return self
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->setBundlerDirectory('./.bundler');
         $this->setHost('/');
         $this->setMinified(false);
@@ -47,70 +49,80 @@ abstract class AbstractMarkup {
     /**
      * @param string $bundlerDirectory
      */
-    public function setBundlerDirectory($bundlerDirectory) {
+    public function setBundlerDirectory($bundlerDirectory)
+    {
         $this->bundlerDirectory = $bundlerDirectory;
     }
 
     /**
      * @return string
      */
-    public function getBundlerDirectory() {
+    public function getBundlerDirectory()
+    {
         return $this->bundlerDirectory;
     }
 
     /**
      * @param string $host
      */
-    public function setHost($host) {
+    public function setHost($host)
+    {
         $this->host = $host;
     }
 
     /**
      * @return string
      */
-    public function getHost() {
+    public function getHost()
+    {
         return $this->host;
     }
 
     /**
      * @param bool $minified
      */
-    public function setMinified($minified) {
+    public function setMinified($minified)
+    {
         $this->minified = $minified;
     }
 
     /**
      * @return bool
      */
-    public function getMinified() {
+    public function getMinified()
+    {
         return $this->minified;
     }
 
     /**
      * @param bool $development
      */
-    public function setDevelopment($development) {
+    public function setDevelopment($development)
+    {
         $this->development = $development;
     }
 
     /**
      * @return bool
      */
-    public function getDevelopment() {
+    public function getDevelopment()
+    {
         return $this->development;
     }
 
     /**
      * @param bool $versionized
      */
-    public function setVersionized($versionized) {
+    public function setVersionized($versionized)
+    {
         $this->versionized = $versionized;
     }
 
     /**
      * @return bool
      */
-    public function getVersionized() {
+    public function getVersionized()
+    {
         return $this->versionized;
     }
 
@@ -118,8 +130,9 @@ abstract class AbstractMarkup {
      * @param string $packageName
      * @return array
      */
-    public function getFiles($packageName) {
-        if(!$this->getDevelopment()) {
+    public function getFiles($packageName)
+    {
+        if (!$this->getDevelopment()) {
             return $this->getFilesCached($packageName);
         }
 
@@ -131,18 +144,19 @@ abstract class AbstractMarkup {
      * @return array
      * @throws MarkupException
      */
-    public function getFilesCached($packageName) {
+    public function getFilesCached($packageName)
+    {
         /** @noinspection PhpIncludeInspection */
         $cache = include $this->getCacheFilename();
 
-        if(!array_key_exists($packageName, $cache)) {
+        if (!array_key_exists($packageName, $cache)) {
             throw new MarkupException('missing package in bundler cache file');
         }
 
         $type = $this->getMinified() ? "min" : "max";
         $filename = $this->getHost() . $cache[$packageName][$type];
 
-        if($this->getVersionized()) {
+        if ($this->getVersionized()) {
             $filename .= '?v=' . $cache[$packageName]['md5'];
         }
 
@@ -154,18 +168,19 @@ abstract class AbstractMarkup {
      * @return array
      * @throws MarkupException
      */
-    public function getFilesDevelopment($packageName) {
+    public function getFilesDevelopment($packageName)
+    {
         /** @noinspection PhpIncludeInspection */
         $file = include $this->getFilename();
 
-        if(!array_key_exists($packageName, $file)) {
+        if (!array_key_exists($packageName, $file)) {
             throw new MarkupException('missing package in bundler file');
         }
 
         $package = $file[$packageName];
         $files = array();
 
-        foreach($package['include'] as $file) {
+        foreach ($package['include'] as $file) {
             $files[] = $this->getHost() . trim($file, '/');
         }
 

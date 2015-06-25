@@ -6,19 +6,22 @@ namespace Bundler\Markup;
  *
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
-class JavascriptMarkup extends AbstractMarkup {
+class JavascriptMarkup extends AbstractMarkup
+{
 
     /**
      * @return string
      */
-    public function getFilename() {
+    public function getFilename()
+    {
         return $this->getBundlerDirectory() . '/javascript.php';
     }
 
     /**
      * @return string
      */
-    public function getCacheFilename() {
+    public function getCacheFilename()
+    {
         return $this->getBundlerDirectory() . '/javascript.cache.php';
     }
 
@@ -26,10 +29,11 @@ class JavascriptMarkup extends AbstractMarkup {
      * @param string $packageName
      * @return string
      */
-    public function getMarkup($packageName) {
+    public function getMarkup($packageName)
+    {
         $markup = array();
 
-        foreach($this->getFiles($packageName) as $file) {
+        foreach ($this->getFiles($packageName) as $file) {
             $markup[] = '<script src="' . $file . '"></script>';
         }
 

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## 8.1.2
+
+- PSR1, PSR2 Coding Standard
+
 ## 8.1.1
 
 - updated composer suggest

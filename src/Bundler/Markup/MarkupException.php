@@ -8,6 +8,7 @@ use Exception;
  *
  * @author Jeff Tunessen <jeff.tunessen@gmail.com>
  */
-class MarkupException extends Exception {
+class MarkupException extends Exception
+{
 
 }
