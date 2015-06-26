@@ -1,6 +1,6 @@
 # bundler-markup
 
-[![Build Status](https://travis-ci.org/elnebuloso/bundler.svg?branch=master)](https://travis-ci.org/elnebuloso/bundler)
+[![Build Status](https://travis-ci.org/elnebuloso/bundler-markup.svg?branch=master)](https://travis-ci.org/elnebuloso/bundler-markup)
 
 markup renderer for bundler
 
