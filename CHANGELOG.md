@@ -3,6 +3,7 @@
 ## 8.1.4
 
 - only testing composer packages after update
+- restructured demo bundled files under public
 
 ## 8.1.2
 
