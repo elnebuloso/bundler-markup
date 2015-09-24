@@ -7,7 +7,7 @@ return array(
         'public' => 'public',
 
         # folder under the public directory
-        'target' => 'js',
+        'target' => 'package/www/builds',
 
         # compiler command to compress / minify / etc. source files to destination files
         # you can stack multiple compilers which are called after another
@@ -19,22 +19,22 @@ return array(
 
         # define includes (all relative under public directory)
         'include' => array(
-            'vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
-            'vendor/twitter/bootstrap/3.1.0/js/bootstrap.js'
+            'package/www/vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
+            'package/www/vendor/twitter/bootstrap/3.1.0/js/bootstrap.js'
         )
     ),
 
     # package name: javascriptBar
     'javascriptBar' => array(
         'public' => 'public',
-        'target' => 'js',
+        'target' => 'package/www/builds',
         'compilers' => array(
             'closure-compiler --compilation_level=WHITESPACE_ONLY --warning_level=QUIET --js=%source% --js_output_file=%destination%'
         ),
         'include' => array(
-            'vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
-            'vendor/twitter/bootstrap/3.1.0/js/bootstrap.js',
-            'js/document.ready.js'
+            'package/www/vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
+            'package/www/vendor/twitter/bootstrap/3.1.0/js/bootstrap.js',
+            'package/www/js/document.ready.js'
         )
     )
 );
