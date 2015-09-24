@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## 8.1.4
+## 8.1.4, 8.1.5
 
 - only testing composer packages after update
 - restructured demo bundled files under public

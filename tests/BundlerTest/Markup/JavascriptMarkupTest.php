@@ -138,7 +138,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('javascriptFoo');
-        $expected = array('/js/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5']);
+        $expected = array('/site/www/builds/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -155,7 +155,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(false);
 
         $result = $this->markup->getFilesCached('javascriptFoo');
-        $expected = array('/js/javascriptFoo.min.js');
+        $expected = array('/site/www/builds/javascriptFoo.min.js');
 
         $this->assertEquals($expected, $result);
     }
@@ -172,7 +172,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('javascriptFoo');
-        $expected = array('/js/javascriptFoo.max.js?v=' . $this->configCache['javascriptFoo']['md5']);
+        $expected = array('/site/www/builds/javascriptFoo.max.js?v=' . $this->configCache['javascriptFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -189,7 +189,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(false);
 
         $result = $this->markup->getFilesCached('javascriptFoo');
-        $expected = array('/js/javascriptFoo.max.js');
+        $expected = array('/site/www/builds/javascriptFoo.max.js');
 
         $this->assertEquals($expected, $result);
     }
@@ -215,8 +215,8 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->markup->getFilesDevelopment('javascriptFoo');
         $expected = array(
-            '/vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
-            '/vendor/twitter/bootstrap/3.1.0/js/bootstrap.js'
+            '/site/www/vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
+            '/site/www/vendor/twitter/bootstrap/3.1.0/js/bootstrap.js'
         );
 
         $this->assertEquals($expected, $result);
@@ -244,7 +244,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFiles('javascriptFoo');
-        $expected = array('/js/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5']);
+        $expected = array('/site/www/builds/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5']);
 
         $this->assertEquals($expected, $result);
     }
@@ -260,7 +260,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setMinified(true);
         $this->markup->setVersionized(true);
 
-        $expected = '<script src="/js/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5'] . '"></script>';
+        $expected = '<script src="/site/www/builds/javascriptFoo.min.js?v=' . $this->configCache['javascriptFoo']['md5'] . '"></script>';
         $this->assertEquals($expected, $this->markup->getMarkup('javascriptFoo'));
     }
 }
