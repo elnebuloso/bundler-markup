@@ -7,7 +7,7 @@ return array(
         'public' => 'public',
 
         # folder under the public directory
-        'target' => 'package/www/builds',
+        'target' => 'site/www/builds',
 
         # compiler command to compress / minify / etc. source files to destination files
         # you can stack multiple compilers which are called after another
@@ -19,22 +19,22 @@ return array(
 
         # define includes (all relative under public directory)
         'include' => array(
-            'package/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
-            'package/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css'
+            'site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
+            'site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css'
         )
     ),
 
     # package name: stylesheetBar
     'stylesheetBar' => array(
         'public' => 'public',
-        'target' => 'package/www/builds',
+        'target' => 'site/www/builds',
         'compilers' => array(
             'yui-compressor --type css --line-break 5000 -o %destination% %source%'
         ),
         'include' => array(
-            'package/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
-            'package/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css',
-            'package/www/css/base.css'
+            'site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
+            'site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css',
+            'site/www/css/base.css'
         )
     )
 );
