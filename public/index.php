@@ -15,13 +15,13 @@ chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
 $stylesheetMarkup = new StylesheetMarkup();
-$stylesheetMarkup->setHost('./');
+$stylesheetMarkup->setHost('/');
 $stylesheetMarkup->setDevelopment(false);
 $stylesheetMarkup->setMinified(true);
 $stylesheetMarkup->setVersionized(true);
 
 $javascriptMarkup = new JavascriptMarkup();
-$javascriptMarkup->setHost('./');
+$javascriptMarkup->setHost('/');
 $javascriptMarkup->setDevelopment(false);
 $javascriptMarkup->setMinified(true);
 $javascriptMarkup->setVersionized(true);
