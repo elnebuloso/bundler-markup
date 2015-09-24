@@ -213,7 +213,7 @@ class JavascriptMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setHost('/');
         $this->markup->setDevelopment(true);
 
-        $result = $this->markup->getFilesDevelopment('javascriptFoo');
+        $result = $this->markup->getFiles('javascriptFoo');
         $expected = array(
             '/site/www/vendor/jquery/jquery/1.11.0/jquery-1.11.0.js',
             '/site/www/vendor/twitter/bootstrap/3.1.0/js/bootstrap.js'

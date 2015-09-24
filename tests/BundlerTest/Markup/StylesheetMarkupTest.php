@@ -213,7 +213,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setHost('/');
         $this->markup->setDevelopment(true);
 
-        $result = $this->markup->getFilesDevelopment('stylesheetFoo');
+        $result = $this->markup->getFiles('stylesheetFoo');
         $expected = array(
             '/site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
             '/site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css'
