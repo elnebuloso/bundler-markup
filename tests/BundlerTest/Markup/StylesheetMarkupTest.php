@@ -10,7 +10,6 @@ use Bundler\Markup\StylesheetMarkup;
  */
 class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var array
      */
@@ -138,7 +137,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('stylesheetFoo');
-        $expected = array('/site/www/builds/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5']);
+        $expected = ['/site/www/builds/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5']];
 
         $this->assertEquals($expected, $result);
     }
@@ -155,7 +154,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(false);
 
         $result = $this->markup->getFilesCached('stylesheetFoo');
-        $expected = array('/site/www/builds/stylesheetFoo.min.css');
+        $expected = ['/site/www/builds/stylesheetFoo.min.css'];
 
         $this->assertEquals($expected, $result);
     }
@@ -172,7 +171,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFilesCached('stylesheetFoo');
-        $expected = array('/site/www/builds/stylesheetFoo.max.css?v=' . $this->configCache['stylesheetFoo']['md5']);
+        $expected = ['/site/www/builds/stylesheetFoo.max.css?v=' . $this->configCache['stylesheetFoo']['md5']];
 
         $this->assertEquals($expected, $result);
     }
@@ -189,7 +188,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(false);
 
         $result = $this->markup->getFilesCached('stylesheetFoo');
-        $expected = array('/site/www/builds/stylesheetFoo.max.css');
+        $expected = ['/site/www/builds/stylesheetFoo.max.css'];
 
         $this->assertEquals($expected, $result);
     }
@@ -214,10 +213,10 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setDevelopment(true);
 
         $result = $this->markup->getFiles('stylesheetFoo');
-        $expected = array(
+        $expected = [
             '/site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap.css',
-            '/site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css'
-        );
+            '/site/www/vendor/twitter/bootstrap/3.1.0/css/bootstrap-theme.css',
+        ];
 
         $this->assertEquals($expected, $result);
     }
@@ -244,7 +243,7 @@ class StylesheetMarkupTest extends \PHPUnit_Framework_TestCase
         $this->markup->setVersionized(true);
 
         $result = $this->markup->getFiles('stylesheetFoo');
-        $expected = array('/site/www/builds/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5']);
+        $expected = ['/site/www/builds/stylesheetFoo.min.css?v=' . $this->configCache['stylesheetFoo']['md5']];
 
         $this->assertEquals($expected, $result);
     }

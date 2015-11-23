@@ -1,5 +1,5 @@
 {
-    "name": "elnebuloso\/bundler-markup",
+    "name": "elnebuloso/bundler-markup",
     "type": "library",
     "license": "MIT",
     "description": "markup renderer for bundler",
@@ -19,14 +19,14 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.4.0"
     },
     "suggest": {
-        "elnebuloso\/bundler": "as require-dev to bundle your stylesheets and your javascripts"
+        "elnebuloso/bundler": "as require-dev to bundle your stylesheet and your javascript"
     },
     "autoload": {
         "psr-0": {
-            "Bundler\\": "src\/"
+            "Bundler\\": "src/"
         }
     }
 }

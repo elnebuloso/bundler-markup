@@ -8,7 +8,6 @@ markup renderer for bundler
 
 The following versions of PHP are supported by this version.
 
-* PHP 5.3
 * PHP 5.4
 * PHP 5.5
 * PHP 5.6
@@ -18,6 +17,18 @@ The following versions of PHP are supported by this version.
 ## Coding Standards
 
 Bundler follows the standards defined in the PSR-0, PSR-1, PSR-2 and PSR-4 documents.
+
+## Installation / Usage
+
+Via Composer
+
+``` json
+{
+    "require-dev": {
+        "elnebuloso/bundler-markup": "~9.0"
+    }
+}
+```
 
 ## Stylesheet Markup rendered by Bundler Stylesheet Config Files
 

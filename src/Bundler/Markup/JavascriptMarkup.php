@@ -8,7 +8,6 @@ namespace Bundler\Markup;
  */
 class JavascriptMarkup extends AbstractMarkup
 {
-
     /**
      * @return string
      */
@@ -31,7 +30,7 @@ class JavascriptMarkup extends AbstractMarkup
      */
     public function getMarkup($packageName)
     {
-        $markup = array();
+        $markup = [];
 
         foreach ($this->getFiles($packageName) as $file) {
             $markup[] = '<script src="' . $file . '"></script>';

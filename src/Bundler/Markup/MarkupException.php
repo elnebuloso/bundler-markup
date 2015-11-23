@@ -10,5 +10,4 @@ use Exception;
  */
 class MarkupException extends Exception
 {
-
 }

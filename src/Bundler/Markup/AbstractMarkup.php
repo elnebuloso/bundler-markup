@@ -8,7 +8,6 @@ namespace Bundler\Markup;
  */
 abstract class AbstractMarkup
 {
-
     /**
      * @var string
      */
@@ -160,7 +159,7 @@ abstract class AbstractMarkup
             $filename .= '?v=' . $cache[$packageName]['md5'];
         }
 
-        return array($filename);
+        return [$filename];
     }
 
     /**
@@ -178,7 +177,7 @@ abstract class AbstractMarkup
         }
 
         $package = $file[$packageName];
-        $files = array();
+        $files = [];
 
         foreach ($package['include'] as $file) {
             $files[] = $this->getHost() . trim($file, '/');

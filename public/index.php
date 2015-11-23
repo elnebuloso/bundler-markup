@@ -10,7 +10,6 @@ ini_set('display_errors', 'on');
 // everything is relative to the application root now.
 chdir(dirname(__DIR__));
 
-// autoloading
 /** @noinspection PhpIncludeInspection */
 require_once 'vendor/autoload.php';
 
@@ -33,7 +32,7 @@ $javascriptMarkup->setVersionized(true);
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>elnebuloso/bundler</title>
+    <title>elnebuloso/bundler-markup</title>
 
     <!-- Bootstrap -->
     <?php echo $stylesheetMarkup->getMarkup('stylesheetFoo'); ?>
@@ -48,7 +47,7 @@ $javascriptMarkup->setVersionized(true);
 <body>
 
 <div class="container">
-    <h1>bundler
+    <h1>bundler-markup
         <small>elnebuloso</small>
     </h1>
 </div>

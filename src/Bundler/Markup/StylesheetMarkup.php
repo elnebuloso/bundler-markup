@@ -8,7 +8,6 @@ namespace Bundler\Markup;
  */
 class StylesheetMarkup extends AbstractMarkup
 {
-
     /**
      * @return string
      */
@@ -31,7 +30,7 @@ class StylesheetMarkup extends AbstractMarkup
      */
     public function getMarkup($packageName)
     {
-        $markup = array();
+        $markup = [];
 
         foreach ($this->getFiles($packageName) as $file) {
             $markup[] = '<link rel="stylesheet" href="' . $file . '" />';

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## 9.0.0
+
+- no support for php 5.3
+- array short syntax
+
 ## 8.1.4, 8.1.5
 
 - only testing composer packages after update
