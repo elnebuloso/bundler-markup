@@ -1,6 +1,6 @@
 # bundler-markup
 
-[![Build Status](https://travis-ci.org/elnebuloso/bundler-markup.svg?branch=master)](https://travis-ci.org/elnebuloso/bundler-markup)
+![abandoned](https://img.shields.io/badge/project-abandoned-red)
 
 markup renderer for bundler
 
